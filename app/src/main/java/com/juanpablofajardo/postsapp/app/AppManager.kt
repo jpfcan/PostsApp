@@ -2,6 +2,8 @@ package com.juanpablofajardo.postsapp.app
 
 import android.app.Application
 import com.juanpablofajardo.postsapp.api.ApiRetrofit
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,6 +18,7 @@ class AppManager: Application() {
         lateinit var DAGGER_COMPONENT: AppComponent
         lateinit var RETROFIT_INSTANCE: ApiRetrofit
         val BASE_URL = "https://jsonplaceholder.typicode.com/"
+        val REALM_SCHEMA_VERSION: Int = 0;
     }
 
 
@@ -23,6 +26,11 @@ class AppManager: Application() {
         super.onCreate()
         setupDagger()
         setupRetrofit()
+        setupRealm()
+    }
+
+    private fun setupDagger() {
+        DAGGER_COMPONENT = DaggerAppComponent.create()
     }
 
     private fun setupRetrofit() {
@@ -36,7 +44,13 @@ class AppManager: Application() {
         RETROFIT_INSTANCE = retrofit.create(ApiRetrofit::class.java)
     }
 
-    private fun setupDagger() {
-        DAGGER_COMPONENT = DaggerAppComponent.create()
+    private fun setupRealm() {
+        Realm.init(this)
+        val configuration = RealmConfiguration.Builder()
+                .name(Realm.DEFAULT_REALM_NAME)
+                .schemaVersion(REALM_SCHEMA_VERSION.toLong())
+                .deleteRealmIfMigrationNeeded()
+                .build()
+        Realm.setDefaultConfiguration(configuration)
     }
 }
