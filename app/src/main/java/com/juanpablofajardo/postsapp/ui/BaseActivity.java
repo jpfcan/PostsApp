@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setToolbarWithCloseIcon() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white);
         }
     }
 

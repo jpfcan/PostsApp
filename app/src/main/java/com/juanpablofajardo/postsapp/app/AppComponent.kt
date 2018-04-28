@@ -1,5 +1,6 @@
 package com.juanpablofajardo.postsapp.app
 
+import com.juanpablofajardo.postsapp.ui.activities.MainActivity
 import dagger.Component
 
 /**
@@ -7,5 +8,7 @@ import dagger.Component
  */
 @Component
 interface AppComponent {
+
+    fun inject(activity: MainActivity)
 
 }
