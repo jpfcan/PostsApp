@@ -1,7 +1,8 @@
-package com.juanpablofajardo.postsapp
+package com.juanpablofajardo.postsapp.ui.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.juanpablofajardo.postsapp.R
 
 class MainActivity : AppCompatActivity() {
 
