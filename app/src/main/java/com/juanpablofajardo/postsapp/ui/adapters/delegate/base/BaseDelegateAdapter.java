@@ -64,6 +64,10 @@ public class BaseDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return viewType.getViewType();
     }
 
+    public ViewType getItem(int position) {
+        return this.items.get(position);
+    }
+
     public void addViewTypeRange(List<? extends ViewType> itemsToAdd) {
         int pos = items.size() - 1;
         items.addAll(itemsToAdd);

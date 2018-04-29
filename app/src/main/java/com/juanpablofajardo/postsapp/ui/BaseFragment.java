@@ -5,12 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.AnimRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RawRes;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.juanpablofajardo.postsapp.R;
 
 import butterknife.BindView;
@@ -56,8 +61,35 @@ public abstract class BaseFragment extends Fragment {
     int getFragmentLayoutResource();
 
     protected void showToastMessage(String message) {
-        if (message != null && mContainerView != null && mContainerView.getContext() != null)
-            Toast.makeText(mContainerView.getContext(), message, Toast.LENGTH_SHORT).show();
+        if (message != null && isAdded())
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showSimpleAlertDialog(String message) {
+        if (isAdded()) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+            dialogBuilder.setMessage(message);
+
+            AlertDialog dialog = dialogBuilder.create();
+            dialog.setCancelable(true);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();
+        }
+    }
+
+    protected void showCustomDialog(@LayoutRes int layoutResource) {
+        if (isAdded()) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+            View dialogView = inflater.inflate(layoutResource, null);
+            dialogBuilder.setView(dialogView);
+
+            AlertDialog dialog = dialogBuilder.create();
+            dialog.setCancelable(true);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();
+        }
     }
 
     protected void openNextActivity(Intent intent) {

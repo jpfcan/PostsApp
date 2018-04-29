@@ -5,5 +5,9 @@
     <string name="lists_section_title">Posts</string>
     <string name="all_posts_fragment_title">All</string>
     <string name="favorite_posts_fragment_title">Favorites</string>
+    <string name="reload_title">Reload</string>
+
+    <!-- MESSAGES -->
+    <string name="message_remove_favorite_from_favorites_tab">When you remove a favorite from here, you\'ll still be able to see it in the list as long as you don\'t refresh. If this was a mistake, you can add it again from this screen.</string>
 
 </resources>
