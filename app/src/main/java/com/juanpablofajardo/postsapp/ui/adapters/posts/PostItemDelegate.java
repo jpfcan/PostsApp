@@ -46,13 +46,13 @@ public class PostItemDelegate extends BaseDelegateItem {
         protected View notReadIndicator;
 
         @BindView(R.id.list_item_title)
-        protected TextView postTitle;
+        protected TextView tvPostTitle;
 
         @BindView(R.id.list_item_content_preview)
-        protected TextView postPreview;
+        protected TextView tvPostPreview;
 
         @BindView(R.id.list_item_favorite_indicator)
-        protected ImageView favoriteAction;
+        protected ImageView ivFavoriteAction;
 
 
         public PostItemViewHolder(ViewGroup parent) {
@@ -65,11 +65,11 @@ public class PostItemDelegate extends BaseDelegateItem {
 
             notReadIndicator.setVisibility(postViewType.isRead() ? View.INVISIBLE : View.VISIBLE);
 
-            postTitle.setText(postViewType.getTitle());
-            postPreview.setText(postViewType.getContent());
+            tvPostTitle.setText(postViewType.getTitle());
+            tvPostPreview.setText(postViewType.getContent());
 
-            favoriteAction.setImageResource(postViewType.isFavorite() ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite_not_filled);
-            favoriteAction.setOnClickListener(view -> listener.onFavoriteIndicatorClick(postViewType));
+            ivFavoriteAction.setImageResource(postViewType.isFavorite() ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite_not_filled);
+            ivFavoriteAction.setOnClickListener(view -> listener.onFavoriteIndicatorClick(postViewType));
 
             itemView.setOnClickListener(v -> listener.onPostViewTypeClicked(postViewType));
         }

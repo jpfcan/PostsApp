@@ -5,9 +5,25 @@
     <string name="lists_section_title">Posts</string>
     <string name="all_posts_fragment_title">All</string>
     <string name="favorite_posts_fragment_title">Favorites</string>
+    <string name="post_detail_title">Post detail</string>
     <string name="reload_title">Reload</string>
+    <string name="favorite_title">Favorite</string>
+    <string name="name_title">Name:</string>
+    <string name="email_title">Email:</string>
+    <string name="phone_title">Phone:</string>
+    <string name="website_title">Website:</string>
+    <string name="comments_title">Comments</string>
+    <string name="comment_by_title">By:</string>
+    
+    <!-- PLACEHOLDERS -->
+    <string name="user_title_placeholder">User: %s</string>
+    <string name="empty_value_hyphens">--</string>
 
     <!-- MESSAGES -->
     <string name="message_remove_favorite_from_favorites_tab">When you remove a favorite from here, you\'ll still be able to see it in the list as long as you don\'t refresh. If this was a mistake, you can add it again from this screen.</string>
+
+    <!-- ERRORS -->
+    <string name="error_fetching_user_info">There was an error fetching this post user\'s info.</string>
+    <string name="error_fetching_comments">There was an error fetching the comments on this post.</string>
 
 </resources>

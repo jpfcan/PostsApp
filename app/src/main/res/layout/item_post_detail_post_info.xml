@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_intermediate_large"
+    android:paddingBottom="@dimen/margin_intermediate_large"
+    android:paddingStart="@dimen/text_size_normal"
+    android:paddingEnd="@dimen/text_size_normal" >
+
+    <TextView
+        android:id="@+id/post_info_title"
+        style="@style/DetailTitleStyle"
+        tools:text="Description"/>
+
+    <TextView
+        android:id="@+id/post_info_content"
+        style="@style/DetailTextStyle"
+        android:layout_marginTop="@dimen/margin_intermediate_large"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+
+
+</LinearLayout>

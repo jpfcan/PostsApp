@@ -11,6 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
+ *
+ * Application class which defines and initializes necessary instances, in this case, Retrofit for the service calls, Dagger for dependency injection and Realm for persistance.
  */
 class AppManager: Application() {
 
@@ -33,6 +35,9 @@ class AppManager: Application() {
         DAGGER_COMPONENT = DaggerAppComponent.create()
     }
 
+    /**
+     * For Retrofit I added a logging interceptor so I'm able to check the requests and responses in the log while working
+     */
     private fun setupRetrofit() {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -44,6 +49,9 @@ class AppManager: Application() {
         RETROFIT_INSTANCE = retrofit.create(ApiRetrofit::class.java)
     }
 
+    /**
+     * TODO add realm migration class
+     */
     private fun setupRealm() {
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()

@@ -1,7 +1,7 @@
 package com.juanpablofajardo.postsapp.models.users
 
 import com.juanpablofajardo.postsapp.app.AppManager
-import com.juanpablofajardo.postsapp.callbacks.UsersListener
+import com.juanpablofajardo.postsapp.callbacks.UserListener
 import com.juanpablofajardo.postsapp.objects.User
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,20 +10,22 @@ import javax.inject.Inject
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
+ *
+ * Model class to be injected in the presenters that need to fetch Users from service
  */
 class UsersModel @Inject constructor() {
 
-    fun fetchUsers(listener: UsersListener) {
-        AppManager.RETROFIT_INSTANCE.getUsers().enqueue(object: Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+    fun fetchUser(id: Int, listener: UserListener) {
+        AppManager.RETROFIT_INSTANCE.getUser(id).enqueue(object: Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful && response.body() != null) {
-                    listener.onUsersFetchSuccess(response.body()!!)
+                    listener.onUserFetchSuccess(response.body()!!)
                 } else {
                     listener.onError()
                 }
             }
 
-            override fun onFailure(call: Call<List<User>>, t: Throwable?) {
+            override fun onFailure(call: Call<User>, t: Throwable?) {
                 listener.onError()
             }
         })

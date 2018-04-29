@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/division_size_half"
+        android:layout_marginBottom="@dimen/margin_normal"
+        android:background="@color/color_division"/>
+
+    <TextView
+        android:id="@+id/post_detail_comment_title"
+        style="@style/ListItemTitleStyle"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        tools:text="quo vero reiciendis velit similique earum"/>
+
+    <TextView
+        android:id="@+id/post_detail_comment_content"
+        style="@style/ListItemTextStyle"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        tools:text="est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ListItemTitleStyle"
+            android:textSize="@dimen/text_size_normal"
+            android:text="@string/comment_by_title"/>
+
+        <TextView
+            android:id="@+id/post_detail_comment_by"
+            style="@style/ListItemTextStyle"
+            android:layout_marginStart="@dimen/margin_small"
+            android:textSize="@dimen/text_size_normal_large"
+            android:maxLines="1"
+            tools:text="Jayne_Kuhic@sydney.com"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/division_size_half"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@color/color_division"/>
+
+</LinearLayout>

@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.juanpablofajardo.postsapp.R;
 import com.juanpablofajardo.postsapp.app.AppManager;
-import com.juanpablofajardo.postsapp.presenters.PostListsPresenter;
+import com.juanpablofajardo.postsapp.presenters.lists.PostListsPresenter;
 import com.juanpablofajardo.postsapp.ui.BaseFragment;
 import com.juanpablofajardo.postsapp.ui.view_interfaces.PostListView;
 
@@ -34,11 +34,6 @@ public class PostListsFragment extends BaseFragment implements PostListView {
     @Inject
     protected PostListsPresenter presenter;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        AppManager.DAGGER_COMPONENT.inject(this);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -88,6 +83,11 @@ public class PostListsFragment extends BaseFragment implements PostListView {
     @Override
     public FragmentActivity getFragmentActivity() {
         return getActivity();
+    }
+
+    @Override
+    protected void injectDependencies() {
+        AppManager.DAGGER_COMPONENT.inject(this);
     }
 
     @Override

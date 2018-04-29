@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 
 import com.juanpablofajardo.postsapp.R;
 import com.juanpablofajardo.postsapp.ui.BaseActivity;
+import com.juanpablofajardo.postsapp.ui.fragments.PostDetailFragment;
 import com.juanpablofajardo.postsapp.ui.fragments.PostListsFragment;
 
 import java.lang.annotation.Retention;
 
+import static com.juanpablofajardo.postsapp.ui.fragments.PostDetailFragment.POST_KEY;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
@@ -18,13 +20,13 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public class GeneralActivity extends BaseActivity {
 
     public static final int LISTS_FRAGMENT = 0x0001;
+    public static final int DETAIL_FRAGMENT = 0x0002;
 
     @Retention(SOURCE)
-    @IntDef({LISTS_FRAGMENT})
+    @IntDef({LISTS_FRAGMENT, DETAIL_FRAGMENT})
     public @interface FragmentCases {
     }
 
-    public static final String SHOW_CLOSE_KEY = "showClose";
     public static final String FRAGMENT_TITLE = "title";
     public static final String FRAGMENT_CASE_KEY = "fragmentCase";
 
@@ -33,16 +35,24 @@ public class GeneralActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         if (getIntent() != null && getIntent().getExtras() != null) {
-            if (getIntent().getExtras().containsKey(FRAGMENT_TITLE)) {
-                setTitle(getIntent().getExtras().getInt(FRAGMENT_TITLE));
+            Bundle extras = getIntent().getExtras();
+
+            if (extras.containsKey(FRAGMENT_TITLE)) {
+                setTitle(extras.getInt(FRAGMENT_TITLE));
             }
 
-            if (getIntent().getExtras().containsKey(FRAGMENT_CASE_KEY)) {
-                @FragmentCases int fragmentCase = getIntent().getExtras().getInt(FRAGMENT_CASE_KEY);
+            if (extras.containsKey(FRAGMENT_CASE_KEY)) {
+                @FragmentCases int fragmentCase = extras.getInt(FRAGMENT_CASE_KEY);
                 switch (fragmentCase) {
                     case LISTS_FRAGMENT:
                         removeToolbarElevation();
                         executeFragment(new PostListsFragment(), false);
+                        break;
+                    case DETAIL_FRAGMENT:
+                        if (extras.containsKey(POST_KEY)) {
+                            setToolbarWithBackArrow();
+                            executeFragment(PostDetailFragment.newInstance(extras.getParcelable(POST_KEY)), false);
+                        }
                         break;
                 }
             }

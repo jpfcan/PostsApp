@@ -14,6 +14,8 @@ import io.realm.RealmObject;
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
+ *
+ * Model class to be injected in the presenters that need to fetch/save posts from/to Realm instance
  */
 public class PostsRealmModel {
 

@@ -1,7 +1,6 @@
 package com.juanpablofajardo.postsapp.ui.activities
 
 import android.os.Bundle
-import android.os.Handler
 import com.juanpablofajardo.postsapp.R
 import com.juanpablofajardo.postsapp.app.AppManager
 import com.juanpablofajardo.postsapp.callbacks.PostsListener
@@ -13,10 +12,6 @@ import com.juanpablofajardo.postsapp.ui.BaseActivity
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
-
-    companion object {
-        val SPLASH_TIME = 1500L
-    }
 
     /*
     @Inject lateinit var usersModel: UsersModel
