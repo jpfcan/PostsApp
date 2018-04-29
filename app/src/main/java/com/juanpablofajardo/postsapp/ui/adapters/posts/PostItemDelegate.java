@@ -39,6 +39,9 @@ public class PostItemDelegate extends BaseDelegateItem {
 
     public class PostItemViewHolder extends BaseDelegateViewHolder {
 
+        @BindView(R.id.list_item_foreground)
+        public View itemForeground;
+
         @BindView(R.id.list_item_not_read_indicator)
         protected View notReadIndicator;
 

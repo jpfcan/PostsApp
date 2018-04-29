@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -27,6 +28,9 @@ public class PostListsFragment extends BaseFragment implements PostListView {
     @BindView(R.id.post_lists_view_pager)
     protected ViewPager listsViewPager;
 
+    @BindView(R.id.post_lists_tab_layout)
+    protected TabLayout listsTabLayout;
+
     @Inject
     protected PostListsPresenter presenter;
 
@@ -42,12 +46,20 @@ public class PostListsFragment extends BaseFragment implements PostListView {
 
         presenter.setView(this);
         presenter.setupViewPager();
+        presenter.setupTabSelectedListener();
     }
 
     @Override
     public void setAdapterToViewPager(FragmentPagerAdapter pagerAdapter) {
         if (isAdded()) {
             listsViewPager.setAdapter(pagerAdapter);
+        }
+    }
+
+    @Override
+    public void setTabSelectedListener(OnTabSelectedListener tabSelectedListener) {
+        if (isAdded()) {
+            listsTabLayout.addOnTabSelectedListener(tabSelectedListener);
         }
     }
 

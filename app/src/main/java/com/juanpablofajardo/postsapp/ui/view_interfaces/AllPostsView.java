@@ -7,4 +7,6 @@ public interface AllPostsView extends BaseView {
 
     void setupRecyclerView(PostsAdapter adapter);
 
+    void refreshOptionsMenu();
+
 }

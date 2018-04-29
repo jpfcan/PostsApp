@@ -5,8 +5,6 @@ package com.juanpablofajardo.postsapp.utils;
  */
 public interface PagerFragmentLifeCycle {
 
-    void onPauseFragment();
-
     void onResumeFragment();
 
 }
