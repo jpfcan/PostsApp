@@ -25,12 +25,12 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Nullable
-    //@BindView(R.id.content_view)
+    @BindView(R.id.content_view)
     FrameLayout contentView;
 
     @Nullable
-    //@BindView(R.id.loading_view)
-    ProgressBar loadingView;
+    @BindView(R.id.loading_view)
+    View loadingView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,11 +52,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    protected void removeToolbarElevation() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(0);
+        }
+    }
+
     protected void executeFragment(@NonNull Fragment fragmentToExecute, boolean addToBackstack) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        //fragmentTransaction.replace(R.id.content_view, fragmentToExecute);
+        fragmentTransaction.replace(R.id.content_view, fragmentToExecute);
         if (addToBackstack) {
             fragmentTransaction.addToBackStack(fragmentToExecute.getTag());
         }

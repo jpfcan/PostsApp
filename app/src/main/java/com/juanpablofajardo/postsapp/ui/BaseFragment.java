@@ -11,12 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.juanpablofajardo.postsapp.R;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
  */
 public abstract class BaseFragment extends Fragment {
+
+    @Nullable
+    @BindView(R.id.loading_view)
+    protected View loadingView;
 
     protected View mContainerView;
 

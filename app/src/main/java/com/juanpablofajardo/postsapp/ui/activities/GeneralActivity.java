@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.juanpablofajardo.postsapp.R;
 import com.juanpablofajardo.postsapp.ui.BaseActivity;
+import com.juanpablofajardo.postsapp.ui.fragments.PostListsFragment;
 
 import java.lang.annotation.Retention;
 
@@ -40,7 +41,8 @@ public class GeneralActivity extends BaseActivity {
                 @FragmentCases int fragmentCase = getIntent().getExtras().getInt(FRAGMENT_CASE_KEY);
                 switch (fragmentCase) {
                     case LISTS_FRAGMENT:
-                        //executeFragment(new StickerListFragment(), false);
+                        removeToolbarElevation();
+                        executeFragment(new PostListsFragment(), false);
                         break;
                 }
             }
