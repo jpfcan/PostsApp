@@ -11,6 +11,8 @@ import io.realm.RealmResults;
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
+ *
+ * Model class to be injected in the presenters that need to fetch/save Users from/to Realm instance
  */
 public class UsersRealmModel {
 

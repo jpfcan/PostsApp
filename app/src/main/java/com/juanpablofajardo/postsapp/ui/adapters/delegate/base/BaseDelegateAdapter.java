@@ -64,22 +64,32 @@ public class BaseDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return viewType.getViewType();
     }
 
-    public ViewType getItem(int position) {
+    protected ViewType getItem(int position) {
         return this.items.get(position);
     }
 
-    public void addViewTypeRange(List<? extends ViewType> itemsToAdd) {
+    protected void addViewType(ViewType itemToAdd) {
+        items.add(itemToAdd);
+        notifyItemInserted(items.size() - 1);
+    }
+
+    protected void addViewType(ViewType itemToAdd, int position) {
+        items.add(position, itemToAdd);
+        notifyItemInserted(position);
+    }
+
+    protected void addViewTypeRange(List<? extends ViewType> itemsToAdd) {
         int pos = items.size() - 1;
         items.addAll(itemsToAdd);
         notifyItemRangeInserted(pos, itemsToAdd.size() - 1);
     }
 
-    public void addViewTypeRangeAtPosition(List<? extends ViewType> itemsToAdd, int position) {
+    protected void addViewTypeRangeAtPosition(List<? extends ViewType> itemsToAdd, int position) {
         items.addAll(position, itemsToAdd);
         notifyItemRangeInserted(position, itemsToAdd.size());
     }
 
-    public void addViewTypeRangeAndClear(List<? extends ViewType> itemsToAdd) {
+    protected void addViewTypeRangeAndClear(List<? extends ViewType> itemsToAdd) {
         items = new ArrayList<>();
         items.addAll(itemsToAdd);
         notifyDataSetChanged();
@@ -100,7 +110,7 @@ public class BaseDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public void removeViewTypeRange(int startingPosition, int amountToRemove) {
+    protected void removeViewTypeRange(int startingPosition, int amountToRemove) {
         if (items.size() > startingPosition && items.size() > startingPosition + amountToRemove) {
             for (int i = 0; i < amountToRemove; i ++) {
                 items.remove(startingPosition);
@@ -117,11 +127,11 @@ public class BaseDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         items = new ArrayList<>();
     }
 
-    public int getItemPosition(ViewType viewType) {
+    protected int getItemPosition(ViewType viewType) {
         return items.indexOf(viewType);
     }
 
-    public void notifyViewTypeChanged(ViewType itemChanged) {
+    protected void notifyViewTypeChanged(ViewType itemChanged) {
         try {
             int pos = getItemPosition(itemChanged);
             if (pos != ERROR_GETTING_ITEM) {

@@ -15,7 +15,7 @@ import android.view.View;
 
 import com.juanpablofajardo.postsapp.R;
 import com.juanpablofajardo.postsapp.app.AppManager;
-import com.juanpablofajardo.postsapp.presenters.AllPostsPresenter;
+import com.juanpablofajardo.postsapp.presenters.lists.AllPostsPresenter;
 import com.juanpablofajardo.postsapp.ui.BaseFragment;
 import com.juanpablofajardo.postsapp.ui.adapters.posts.PostsAdapter;
 import com.juanpablofajardo.postsapp.ui.view_interfaces.AllPostsView;
@@ -40,32 +40,36 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
     @Inject
     protected AllPostsPresenter presenter;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        AppManager.DAGGER_COMPONENT.inject(this);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.setView(this);
-        presenter.fetchAllPostsFromDB();
+        if (presenter != null) {
+            presenter.setView(this);
+        }
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onResumeFragment();
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_list_fragment, menu);
-        menu.findItem(R.id.menu_reload).setVisible(presenter.getShouldShowReload());
+        menu.findItem(R.id.menu_item_reload).setVisible(presenter.getShouldShowReload());
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_reload:
-                presenter.fetchAllPostFromService();
+            case R.id.menu_item_reload:
+                if (presenter != null) {
+                    presenter.fetchAllPostFromService();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -83,7 +87,9 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        presenter.removeItem(position);
+        if (presenter != null) {
+            presenter.removeItem(position);
+        }
     }
 
     @Override
@@ -95,7 +101,9 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
 
     @Override
     public void onResumeFragment() {
-        //NO-OP
+        if (presenter != null) {
+            presenter.fetchAllPostsFromDB();
+        }
     }
 
     @Override
@@ -121,12 +129,19 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
 
     @Override
     protected void destroyView() {
-        presenter.setView(null);
+        if (presenter != null) {
+            presenter.setView(null);
+        }
     }
 
     @Override
     public FragmentActivity getFragmentActivity() {
         return getActivity();
+    }
+
+    @Override
+    protected void injectDependencies() {
+        AppManager.DAGGER_COMPONENT.inject(this);
     }
 
     @Override

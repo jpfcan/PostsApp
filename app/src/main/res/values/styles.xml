@@ -27,4 +27,19 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="DetailTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_text_normal</item>
+        <item name="android:textSize">@dimen/text_size_normal_large</item>
+        <item name="android:lineSpacingExtra">@dimen/text_detail_line_spacing_extra</item>
+    </style>
+
+    <style name="DetailTitleStyle" parent="DetailTextStyle">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+        <item name="android:textColor">@color/color_text_title</item>
+    </style>
+
 </resources>

@@ -14,6 +14,9 @@ import static com.juanpablofajardo.postsapp.ui.activities.GeneralActivity.LISTS_
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
+ *
+ * Navigator to be used in {@link com.juanpablofajardo.postsapp.ui.activities.MainActivity}, which is our splash screen.
+ * It'll be used to launch the screen with the lists of posts
  */
 public class MainNavigator {
 

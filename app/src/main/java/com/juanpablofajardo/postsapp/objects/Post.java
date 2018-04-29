@@ -9,6 +9,8 @@ import io.realm.annotations.RealmClass;
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
+ *
+ * Object that comes from service and also is stored in Realm's instance for offline functionality.
  */
 @RealmClass
 public class Post implements RealmModel, Parcelable {
@@ -17,9 +19,7 @@ public class Post implements RealmModel, Parcelable {
     private int id;
 
     private int userId;
-
     private String title;
-
     private String body;
 
     public Post() {

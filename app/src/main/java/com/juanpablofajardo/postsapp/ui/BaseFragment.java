@@ -32,6 +32,12 @@ public abstract class BaseFragment extends Fragment {
 
     protected View mContainerView;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        injectDependencies();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +51,11 @@ public abstract class BaseFragment extends Fragment {
         destroyView();
         super.onDestroyView();
     }
+
+    /**
+     * This method is to enforce dependency injection for all fragments
+     */
+    protected abstract void injectDependencies();
 
     /**
      * Use this method to remove the presenter when the view is destroyed

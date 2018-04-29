@@ -9,6 +9,8 @@ import com.juanpablofajardo.postsapp.ui.adapters.posts.PostItemDelegate.PostItem
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/29/18.
+ *
+ * Callback that manages swipe on list items of {@link PostItemViewHolder} type
  */
 public class PostItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
@@ -24,6 +26,7 @@ public class PostItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         return true;
     }
 
+    //TODO change all RecyclerView.ViewHolder to PostItemViewHolder
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         if (viewHolder != null) {

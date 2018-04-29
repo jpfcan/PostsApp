@@ -15,7 +15,7 @@ import android.view.View;
 
 import com.juanpablofajardo.postsapp.R;
 import com.juanpablofajardo.postsapp.app.AppManager;
-import com.juanpablofajardo.postsapp.presenters.FavoritePostsPresenter;
+import com.juanpablofajardo.postsapp.presenters.lists.FavoritePostsPresenter;
 import com.juanpablofajardo.postsapp.ui.BaseFragment;
 import com.juanpablofajardo.postsapp.ui.adapters.posts.PostsAdapter;
 import com.juanpablofajardo.postsapp.ui.view_interfaces.FavoritePostsView;
@@ -38,31 +38,31 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
     @Inject
     protected FavoritePostsPresenter presenter;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        AppManager.DAGGER_COMPONENT.inject(this);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         presenter.setView(this);
-        presenter.fetchAllFavoritesFromDB();
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onResumeFragment();
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_list_fragment, menu);
-        menu.findItem(R.id.menu_reload).setVisible(presenter.getShouldShowReload());
+        menu.findItem(R.id.menu_item_reload).setVisible(presenter.getShouldShowReload());
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_reload:
+            case R.id.menu_item_reload:
                 presenter.fetchAllFavoritesFromDB();
                 return true;
         }
@@ -95,6 +95,7 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
     public void showFavoriteAlertDialog() {
         showCustomDialog(R.layout.dialog_alert_remove_favorite);
     }
+
 
     @Override
     public void onResumeFragment() {
@@ -130,6 +131,11 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
     @Override
     public FragmentActivity getFragmentActivity() {
         return getActivity();
+    }
+
+    @Override
+    protected void injectDependencies() {
+        AppManager.DAGGER_COMPONENT.inject(this);
     }
 
     @Override
