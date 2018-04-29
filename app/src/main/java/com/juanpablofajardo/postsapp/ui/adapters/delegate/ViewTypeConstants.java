@@ -10,6 +10,6 @@ package com.juanpablofajardo.postsapp.ui.adapters.delegate;
 
 public class ViewTypeConstants {
 
-
+    public static final int POST_VIEW_TYPE = 0x00001;
 
 }

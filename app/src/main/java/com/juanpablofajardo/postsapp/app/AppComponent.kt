@@ -1,6 +1,8 @@
 package com.juanpablofajardo.postsapp.app
 
 import com.juanpablofajardo.postsapp.ui.activities.MainActivity
+import com.juanpablofajardo.postsapp.ui.fragments.AllPostsFragment
+import com.juanpablofajardo.postsapp.ui.fragments.PostListsFragment
 import dagger.Component
 
 /**
@@ -10,5 +12,9 @@ import dagger.Component
 interface AppComponent {
 
     fun inject(activity: MainActivity)
+
+    fun inject(fragment: PostListsFragment)
+
+    fun inject(fragment: AllPostsFragment)
 
 }
