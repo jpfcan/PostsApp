@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">PostsApp</string>
+    <string name="app_name">Social Posts App</string>
+
+    <!-- TITLES -->
+    <string name="lists_section_title">Posts</string>
+    <string name="all_posts_fragment_title">All</string>
+    <string name="favorite_posts_fragment_title">Favorites</string>
+
 </resources>
