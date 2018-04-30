@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Social Posts App</string>
+
+    <!-- TITLES -->
+    <string name="lists_section_title">Posts</string>
+    <string name="all_posts_fragment_title">Todos</string>
+    <string name="favorite_posts_fragment_title">Favoritos</string>
+    <string name="post_detail_title">Detalle del post</string>
+    <string name="reload_title">Recargar</string>
+    <string name="favorite_title">Favorito</string>
+    <string name="name_title">Nombre:</string>
+    <string name="email_title">Email:</string>
+    <string name="phone_title">Teléfono:</string>
+    <string name="website_title">Página web:</string>
+    <string name="comments_title">Comentarios</string>
+    <string name="comment_by_title">Por:</string>
+    
+    <!-- PLACEHOLDERS -->
+    <string name="user_title_placeholder">Usuario: %s</string>
+
+    <!-- MESSAGES -->
+    <string name="message_remove_favorite_from_favorites_tab">Cuando remueves un favorito desde acá, podrás seguirlo viendo hasta que actualices la lista. Si lo removiste por error, puedes volver a agregarlo desde aquí.</string>
+
+    <!-- ERRORS -->
+    <string name="error_fetching_user_info">Hubo un error buscando la informacion del usuario de este post.</string>
+    <string name="error_fetching_comments">Hubo un error buscando los commentarios sobre este post.</string>
+    <string name="error_fetching_posts_list">Lo sentimos, hubo un error buscando posts en el servidor.</string>
+
+</resources>
