@@ -71,6 +71,7 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
             shouldShowReload = false;
             view.refreshOptionsMenu();
             view.setEmptyStateVisibility(false);
+            view.setDeleteAllVisibility(false);
             view.showLoading();
             postsModel.fetchPosts(this);
         }
@@ -94,12 +95,8 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
     public void updatePostStates() {
         if (view != null) {
             view.showLoading();
-            try {
-                List<Post> postsFromRealm = postsRealmModel.getPosts();
-                setupAdapter(postsFromRealm);
-            } catch (Exception e) {
-                //TODO show error
-            }
+            List<Post> postsFromRealm = postsRealmModel.getPosts();
+            setupAdapter(postsFromRealm);
         }
     }
 
@@ -127,7 +124,11 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
 
     @Override
     public void onError() {
-        //TODO show error screen
+        if (view != null) {
+            view.setDeleteAllVisibility(!adapter.getItems().isEmpty());
+            view.showErrorDialog();
+            view.hideLoading();
+        }
     }
 
     @Override

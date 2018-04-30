@@ -45,15 +45,13 @@ public class FavoritePostsPresenter implements BasePresenter<FavoritePostsView>,
     public void fetchAllFavoritesFromDB() {
         if (view != null) {
             shouldShowReload = false;
+            view.showLoading();
             view.refreshOptionsMenu();
             view.setEmptyStateVisibility(false);
-            view.showLoading();
-            try {
-                setupAdapter(postsRealmModel.getFavoritePosts());
-            } catch (Exception e) {
-                //TODO show error screen
-                view.hideLoading();
-            }
+
+            setupAdapter(postsRealmModel.getFavoritePosts());
+
+            view.hideLoading();
         }
     }
 

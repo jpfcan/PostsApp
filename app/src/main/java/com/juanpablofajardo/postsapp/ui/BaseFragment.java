@@ -76,18 +76,6 @@ public abstract class BaseFragment extends Fragment {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    protected void showSimpleAlertDialog(String message) {
-        if (isAdded()) {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-            dialogBuilder.setMessage(message);
-
-            AlertDialog dialog = dialogBuilder.create();
-            dialog.setCancelable(true);
-            dialog.setCanceledOnTouchOutside(true);
-            dialog.show();
-        }
-    }
-
     protected void showCustomDialog(@LayoutRes int layoutResource) {
         if (isAdded()) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
@@ -100,19 +88,6 @@ public abstract class BaseFragment extends Fragment {
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
             dialog.show();
-        }
-    }
-
-    protected void openNextActivity(Intent intent) {
-        if (getActivity() != null && !getActivity().isDestroyed()) {
-            startActivity(intent);
-        }
-    }
-
-    protected void openNextActivity(Intent intent, @AnimRes int enterAnim, @AnimRes int exitAnima) {
-        if (getActivity() != null && !getActivity().isDestroyed()) {
-            startActivity(intent);
-            getActivity().overridePendingTransition(enterAnim, exitAnima);
         }
     }
 

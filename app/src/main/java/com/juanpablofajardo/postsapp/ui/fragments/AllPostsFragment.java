@@ -109,6 +109,13 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
         }
     }
 
+    @Override
+    public void showErrorDialog() {
+        if (isAdded()) {
+            showCustomDialog(R.layout.dialog_connection_error);
+        }
+    }
+
     @OnClick(R.id.fab_delete_all)
     public void onDeleteAllClick() {
         if (presenter != null) {

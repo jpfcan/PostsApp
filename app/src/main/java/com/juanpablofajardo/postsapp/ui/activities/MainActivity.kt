@@ -1,5 +1,7 @@
 package com.juanpablofajardo.postsapp.ui.activities
 
+import android.content.DialogInterface
+import android.content.DialogInterface.OnDismissListener
 import android.os.Bundle
 import com.juanpablofajardo.postsapp.R
 import com.juanpablofajardo.postsapp.app.AppManager
@@ -56,7 +58,11 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onError() {
-                //TODO show error dialog
+                navigator.showConnectionErrorDialog(this@MainActivity, object : OnDismissListener {
+                    override fun onDismiss(dialog: DialogInterface?) {
+                        navigator.launchListsSection(this@MainActivity)
+                    }
+                })
             }
         })
     }
