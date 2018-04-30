@@ -16,9 +16,6 @@ import static com.juanpablofajardo.postsapp.ui.adapters.delegate.ViewTypeConstan
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
  */
-/*
-  TODO this class would be better if it were done in Kotlin, which provides better transforming and filtering functionalities
- */
 
 public class PostsAdapter extends BaseDelegateAdapter implements PostItemListener {
 

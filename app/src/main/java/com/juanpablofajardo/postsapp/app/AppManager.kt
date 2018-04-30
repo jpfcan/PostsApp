@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
  *
@@ -49,16 +50,14 @@ class AppManager: Application() {
         RETROFIT_INSTANCE = retrofit.create(ApiRetrofit::class.java)
     }
 
-    /**
-     * TODO add realm migration class
-     */
     private fun setupRealm() {
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()
                 .name(Realm.DEFAULT_REALM_NAME)
                 .schemaVersion(REALM_SCHEMA_VERSION.toLong())
-                .deleteRealmIfMigrationNeeded()
+                .migration(AppRealmMigration())
                 .build()
         Realm.setDefaultConfiguration(configuration)
     }
+
 }

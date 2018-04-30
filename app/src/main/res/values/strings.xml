@@ -14,6 +14,7 @@
     <string name="website_title">Website:</string>
     <string name="comments_title">Comments</string>
     <string name="comment_by_title">By:</string>
+    <string name="dismiss">Dismiss</string>
     
     <!-- PLACEHOLDERS -->
     <string name="user_title_placeholder">User: %s</string>
@@ -25,5 +26,6 @@
     <!-- ERRORS -->
     <string name="error_fetching_user_info">There was an error fetching this post user\'s info.</string>
     <string name="error_fetching_comments">There was an error fetching the comments on this post.</string>
+    <string name="error_fetching_posts_list">We\'re sorry, there was an error fetching posts from server.</string>
 
 </resources>

@@ -9,4 +9,6 @@ public interface AllPostsView extends BasePostListView {
 
     void setDeleteAllVisibility(boolean visible);
 
+    void showErrorDialog();
+
 }

@@ -100,4 +100,15 @@ public class PostsRealmModel {
             readPosts.deleteAllFromRealm();
         });
     }
+
+    public void removeReadPosts(List<Post> posts) {
+        Realm.getDefaultInstance().executeTransaction(realm -> {
+            for (Post post : posts) {
+                ReadPost readPost = realm.where(ReadPost.class).equalTo(POST_ID_KEY, post.getId()).findFirst();
+                if (readPost != null) {
+                    RealmObject.deleteFromRealm(readPost);
+                }
+            }
+        });
+    }
 }

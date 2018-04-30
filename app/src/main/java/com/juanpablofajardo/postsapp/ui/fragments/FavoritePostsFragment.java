@@ -109,7 +109,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
 
     @Override
     public void showFavoriteAlertDialog() {
-        showCustomDialog(R.layout.dialog_alert_remove_favorite);
+        if (isAdded()) {
+            showCustomDialog(R.layout.dialog_alert_remove_favorite);
+        }
     }
 
 

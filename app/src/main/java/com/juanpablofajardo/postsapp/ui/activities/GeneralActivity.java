@@ -3,6 +3,8 @@ package com.juanpablofajardo.postsapp.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 import com.juanpablofajardo.postsapp.R;
 import com.juanpablofajardo.postsapp.ui.BaseActivity;

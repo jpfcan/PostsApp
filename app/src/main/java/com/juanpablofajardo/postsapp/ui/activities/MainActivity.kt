@@ -1,5 +1,7 @@
 package com.juanpablofajardo.postsapp.ui.activities
 
+import android.content.DialogInterface
+import android.content.DialogInterface.OnDismissListener
 import android.os.Bundle
 import com.juanpablofajardo.postsapp.R
 import com.juanpablofajardo.postsapp.app.AppManager
@@ -51,14 +53,25 @@ class MainActivity : BaseActivity() {
     private fun fetchPosts() {
         postsModel.fetchPosts(object : PostsListener {
             override fun onPostsFetchSuccess(posts: List<Post>) {
+                setFirstTwentyAsUnRead(posts)
                 postsRealmModel.insertPosts(posts)
                 navigator.launchListsSection(this@MainActivity)
             }
 
             override fun onError() {
-                //TODO show error dialog
+                navigator.showConnectionErrorDialog(this@MainActivity, object : OnDismissListener {
+                    override fun onDismiss(dialog: DialogInterface?) {
+                        navigator.launchListsSection(this@MainActivity)
+                    }
+                })
             }
         })
+    }
+
+    //This is as required by the test specifications
+    //As an asumption, it is done only when the posts are fetched from service
+    private fun setFirstTwentyAsUnRead(posts: List<Post>) {
+        postsRealmModel.removeReadPosts(posts.subList(0, 20))
     }
 
     override fun getLayoutResource() = R.layout.activity_main
