@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
@@ -80,6 +81,19 @@ public class PostsRealmModel {
             if (readPost != null) {
                 RealmObject.deleteFromRealm(readPost);
             }
+        });
+    }
+
+    public void deleteAllPosts() {
+        Realm.getDefaultInstance().executeTransaction(realm -> {
+            RealmResults<Post> results = realm.where(Post.class).findAll();
+            results.deleteAllFromRealm();
+
+            RealmResults<FavoritePost> favoritePosts = realm.where(FavoritePost.class).findAll();
+            favoritePosts.deleteAllFromRealm();
+
+            RealmResults<ReadPost> readPosts = realm.where(ReadPost.class).findAll();
+            readPosts.deleteAllFromRealm();
         });
     }
 }

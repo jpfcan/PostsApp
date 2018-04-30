@@ -78,14 +78,36 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
         if (view != null) {
             adapter = new PostsAdapter(posts, this, postsRealmModel);
             view.setupRecyclerView(adapter);
+            view.setDeleteAllVisibility(!posts.isEmpty());
             shouldShowReload = true;
             view.refreshOptionsMenu();
             view.hideLoading();
         }
     }
 
+    public void updatePostStates() {
+        if (view != null) {
+            view.showLoading();
+            try {
+                List<Post> postsFromRealm = postsRealmModel.getPosts();
+                setupAdapter(postsFromRealm);
+            } catch (Exception e) {
+                //TODO show error
+            }
+        }
+    }
+
     public void removeItem(final int position) {
         adapter.removeItemOnSwipe(position);
+    }
+
+    public void executeDeleteAll() {
+        if (view != null) {
+            view.showLoading();
+            view.setDeleteAllVisibility(false);
+            postsRealmModel.deleteAllPosts();
+            adapter.clearItems();
+        }
     }
 
     @Override

@@ -53,7 +53,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailView {
         super.onViewCreated(view, savedInstanceState);
 
         Bundle arguments = getArguments();
-        if (arguments != null && arguments.containsKey(POST_KEY)) {
+        if (arguments != null && arguments.containsKey(POST_KEY) && presenter != null) {
             presenter.setView(this);
             presenter.setPost(arguments.getParcelable(POST_KEY));
             presenter.setupPostDetailDelegateAdapter();
@@ -66,9 +66,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailView {
         inflater.inflate(R.menu.menu_post_detail, menu);
 
         menuItemFavorite = menu.findItem(R.id.menu_item_favorite);
-        menuItemFavorite.setVisible(presenter.getShouldShowFavorite());
-        if (menuItemFavorite.isVisible()) {
-            menuItemFavorite.setIcon(presenter.getFavoriteStateIcon());
+        if (presenter != null) {
+            menuItemFavorite.setVisible(presenter.getShouldShowFavorite());
+            if (menuItemFavorite.isVisible()) {
+                menuItemFavorite.setIcon(presenter.getFavoriteStateIcon());
+            }
         }
     }
 
@@ -76,7 +78,9 @@ public class PostDetailFragment extends BaseFragment implements PostDetailView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_favorite:
-                presenter.onFavoriteItemAction();
+                if (presenter != null) {
+                    presenter.onFavoriteItemAction();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -118,7 +122,9 @@ public class PostDetailFragment extends BaseFragment implements PostDetailView {
 
     @Override
     protected void destroyView() {
-        presenter.setView(null);
+        if (presenter != null) {
+            presenter.setView(null);
+        }
     }
 
     @Override

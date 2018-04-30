@@ -5,10 +5,8 @@ import com.juanpablofajardo.postsapp.ui.adapters.posts.PostsAdapter;
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
  */
-public interface AllPostsView extends BaseView {
+public interface AllPostsView extends BasePostListView {
 
-    void setupRecyclerView(PostsAdapter adapter);
-
-    void refreshOptionsMenu();
+    void setDeleteAllVisibility(boolean visible);
 
 }

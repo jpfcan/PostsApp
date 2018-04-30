@@ -39,9 +39,11 @@ public class PostListsFragment extends BaseFragment implements PostListView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.setView(this);
-        presenter.setupViewPager();
-        presenter.setupTabSelectedListener();
+        if (presenter != null) {
+            presenter.setView(this);
+            presenter.setupViewPager();
+            presenter.setupTabSelectedListener();
+        }
     }
 
     @Override
@@ -77,7 +79,9 @@ public class PostListsFragment extends BaseFragment implements PostListView {
 
     @Override
     protected void destroyView() {
-        presenter.setView(null);
+        if (presenter != null) {
+            presenter.setView(null);
+        }
     }
 
     @Override
