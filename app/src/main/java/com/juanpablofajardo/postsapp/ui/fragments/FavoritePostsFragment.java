@@ -34,6 +34,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
     @BindView(R.id.posts_recycler_view)
     protected RecyclerView favoritePostRecyclerView;
 
+    @BindView(R.id.posts_empty_state)
+    protected View emptyStateView;
+
 
     @Inject
     protected FavoritePostsPresenter presenter;
@@ -80,6 +83,13 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
             favoritePostRecyclerView.setAdapter(adapter);
             SimpleCallback touchHelperCallBack = new PostItemTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, this);
             new ItemTouchHelper(touchHelperCallBack).attachToRecyclerView(favoritePostRecyclerView);
+        }
+    }
+
+    @Override
+    public void setEmptyStateVisibility(boolean visible) {
+        if (isAdded()) {
+            emptyStateView.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
     }
 

@@ -48,6 +48,10 @@ public class PostsRealmModel {
         });
     }
 
+    public void addReadPost(ReadPost readPost) {
+        Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(readPost));
+    }
+
     public List<Post> getFavoritePosts() {
         Integer[] idsArray = TransformUtils.transformFavoritePostToOnlyIdsArray(getFavoritePostsIds());
         return Realm.getDefaultInstance().where(Post.class).in(ID_KEY, idsArray).findAll();

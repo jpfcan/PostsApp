@@ -38,8 +38,12 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
     @BindView(R.id.posts_recycler_view)
     protected RecyclerView allPostRecyclerView;
 
+    @BindView(R.id.posts_empty_state)
+    protected View emptyStateView;
+
     @BindView(R.id.fab_delete_all)
     protected FloatingActionButton buttonDeleteAll;
+
 
     @Inject
     protected AllPostsPresenter presenter;
@@ -87,6 +91,14 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
             allPostRecyclerView.setAdapter(adapter);
             SimpleCallback touchHelperCallBack = new PostItemTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, this);
             new ItemTouchHelper(touchHelperCallBack).attachToRecyclerView(allPostRecyclerView);
+        }
+    }
+
+    @Override
+    public void setEmptyStateVisibility(boolean visible) {
+        if (isAdded()) {
+            emptyStateView.setVisibility(visible ? View.VISIBLE : View.GONE);
+            buttonDeleteAll.setVisibility(visible ? View.GONE : View.VISIBLE);
         }
     }
 

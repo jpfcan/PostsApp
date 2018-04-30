@@ -63,11 +63,19 @@ public class PostDetailAdapter extends BaseDelegateAdapter implements UserInfoLi
 
     public void addPostUserInfo(final User postUser) {
         addViewType(TransformUtils.getPostUserInfoViewType(postUser), getItemPosition(userInfoLoading));
+        removeUserInfoLoader();
+    }
+
+    public void removeUserInfoLoader() {
         removeViewType(userInfoLoading);
     }
 
     public void addComments(List<Comment> comments) {
         addViewTypeRange(TransformUtils.getPostCommentViewTypes(comments));
+        removeCommentsLoader();
+    }
+
+    public void removeCommentsLoader() {
         removeViewType(commentsLoading);
     }
 

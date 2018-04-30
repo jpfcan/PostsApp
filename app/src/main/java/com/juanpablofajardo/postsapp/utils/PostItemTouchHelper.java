@@ -26,7 +26,6 @@ public class PostItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         return true;
     }
 
-    //TODO change all RecyclerView.ViewHolder to PostItemViewHolder
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         if (viewHolder != null) {

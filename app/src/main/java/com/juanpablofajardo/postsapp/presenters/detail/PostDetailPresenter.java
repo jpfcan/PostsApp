@@ -10,10 +10,12 @@ import com.juanpablofajardo.postsapp.models.posts.PostsModel;
 import com.juanpablofajardo.postsapp.models.realm.PostsRealmModel;
 import com.juanpablofajardo.postsapp.models.realm.UsersRealmModel;
 import com.juanpablofajardo.postsapp.models.users.UsersModel;
+import com.juanpablofajardo.postsapp.navigators.PostDetailNavigator;
 import com.juanpablofajardo.postsapp.objects.Comment;
 import com.juanpablofajardo.postsapp.objects.Post;
 import com.juanpablofajardo.postsapp.objects.User;
 import com.juanpablofajardo.postsapp.objects.realm.FavoritePost;
+import com.juanpablofajardo.postsapp.objects.realm.ReadPost;
 import com.juanpablofajardo.postsapp.presenters.BasePresenter;
 import com.juanpablofajardo.postsapp.ui.adapters.delegate.common.LayoutOnlyViewType;
 import com.juanpablofajardo.postsapp.ui.adapters.detail.PostDetailAdapter;
@@ -36,6 +38,8 @@ public class PostDetailPresenter implements BasePresenter<PostDetailView>, PostD
 
     private PostDetailView view;
 
+    private PostDetailNavigator navigator;
+
     private UsersModel usersModel;
     private UsersRealmModel usersRealmModel;
     private PostsRealmModel postsRealmModel;
@@ -50,8 +54,9 @@ public class PostDetailPresenter implements BasePresenter<PostDetailView>, PostD
 
 
     @Inject
-    public PostDetailPresenter(final UsersModel usersModel, final UsersRealmModel usersRealmModel,
+    public PostDetailPresenter(final PostDetailNavigator postDetailNavigator, final UsersModel usersModel, final UsersRealmModel usersRealmModel,
                                final PostsRealmModel postsRealmModel, final CommentsModel commentsModel) {
+        this.navigator = postDetailNavigator;
         this.usersModel = usersModel;
         this.usersRealmModel = usersRealmModel;
         this.postsRealmModel = postsRealmModel;
@@ -66,6 +71,7 @@ public class PostDetailPresenter implements BasePresenter<PostDetailView>, PostD
     public void setPost(final Post post) {
         this.post = post;
         this.isFavorite = postsRealmModel.checkIfFavorite(post.getId());
+        postsRealmModel.addReadPost(new ReadPost(post.getId()));
     }
 
     public void setupPostDetailDelegateAdapter() {
@@ -101,7 +107,7 @@ public class PostDetailPresenter implements BasePresenter<PostDetailView>, PostD
 
             @Override
             public void onError() {
-                //TODO remove loader user info
+                detailAdapter.removeUserInfoLoader();
                 if (view != null) {
                     view.showMessageToast(view.getResources().getString(R.string.error_fetching_user_info));
                 }
@@ -123,7 +129,7 @@ public class PostDetailPresenter implements BasePresenter<PostDetailView>, PostD
 
             @Override
             public void onError() {
-                //TODO remove loader user info
+                detailAdapter.removeCommentsLoader();
                 if (view != null) {
                     view.showMessageToast(view.getResources().getString(R.string.error_fetching_comments));
                 }
@@ -141,12 +147,16 @@ public class PostDetailPresenter implements BasePresenter<PostDetailView>, PostD
 
     @Override
     public void onDetailItemEmailClick(final String email) {
-        //TODO launch email intent
+        if (navigator != null && view != null && view.getFragmentActivity() != null) {
+            navigator.launchEmailIntent(view.getFragmentActivity(), email);
+        }
     }
 
     @Override
     public void onDetailItemWebsiteClick(final String website) {
-        //TODO launch browser intent
+        if (navigator != null && view != null && view.getFragmentActivity() != null) {
+            navigator.launchBrowserIntent(view.getFragmentActivity(), website);
+        }
     }
 
     public boolean getShouldShowFavorite() {

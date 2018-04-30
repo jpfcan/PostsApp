@@ -9,6 +9,8 @@ public interface BasePostListView extends BaseView {
 
     void setupRecyclerView(PostsAdapter adapter);
 
+    void setEmptyStateVisibility(boolean visible);
+
     void refreshOptionsMenu();
 
 }

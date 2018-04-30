@@ -50,6 +50,7 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
 
     public void fetchAllPostsFromDB() {
         if (view != null) {
+            view.setEmptyStateVisibility(false);
             view.showLoading();
             try {
                 List<Post> postsFromRealm = postsRealmModel.getPosts();
@@ -69,6 +70,7 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
         if (view != null) {
             shouldShowReload = false;
             view.refreshOptionsMenu();
+            view.setEmptyStateVisibility(false);
             view.showLoading();
             postsModel.fetchPosts(this);
         }
@@ -76,6 +78,10 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
 
     private void setupAdapter(final List<Post> posts) {
         if (view != null) {
+            if (posts.isEmpty()) {
+                view.setEmptyStateVisibility(true);
+            }
+
             adapter = new PostsAdapter(posts, this, postsRealmModel);
             view.setupRecyclerView(adapter);
             view.setDeleteAllVisibility(!posts.isEmpty());
@@ -99,12 +105,15 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
 
     public void removeItem(final int position) {
         adapter.removeItemOnSwipe(position);
+        if (adapter.getItems().isEmpty() && view != null) {
+            view.setEmptyStateVisibility(true);
+        }
     }
 
     public void executeDeleteAll() {
         if (view != null) {
             view.showLoading();
-            view.setDeleteAllVisibility(false);
+            view.setEmptyStateVisibility(true);
             postsRealmModel.deleteAllPosts();
             adapter.clearItems();
         }
