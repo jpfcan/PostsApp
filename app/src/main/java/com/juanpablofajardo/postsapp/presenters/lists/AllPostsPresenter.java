@@ -116,8 +116,15 @@ public class AllPostsPresenter implements BasePresenter<AllPostsView>, PostsAdap
         }
     }
 
+    //This is as required by the test specifications
+    //As an asumption, it is done only when the posts are fetched from service
+    private void setFirstTwentyAsUnRead(List<Post> posts) {
+        postsRealmModel.removeReadPosts(posts.subList(0, 20));
+    }
+
     @Override
     public void onPostsFetchSuccess(@NotNull final List<Post> posts) {
+        setFirstTwentyAsUnRead(posts);
         postsRealmModel.insertPosts(posts);
         setupAdapter(posts);
     }
