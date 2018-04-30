@@ -125,6 +125,7 @@ public class BaseDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void clearItems() {
         items = new ArrayList<>();
+        notifyDataSetChanged();
     }
 
     protected int getItemPosition(ViewType viewType) {

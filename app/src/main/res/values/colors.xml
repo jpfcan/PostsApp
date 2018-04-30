@@ -8,6 +8,7 @@
     <color name="color_read_post_indicator">#46d5e1</color>
     <color name="color_background_1">#89aeabab</color>
     <color name="color_division">#868686</color>
+    <color name="red_delete_all">#da1616</color>
 
     <!-- TEXT COLORS -->
     <color name="color_text_normal">#817f7f</color>

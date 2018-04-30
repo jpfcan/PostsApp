@@ -43,7 +43,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.setView(this);
+        if (presenter != null) {
+            presenter.setView(this);
+        }
         setHasOptionsMenu(true);
     }
 
@@ -63,7 +65,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_reload:
-                presenter.fetchAllFavoritesFromDB();
+                if (presenter != null) {
+                    presenter.fetchAllFavoritesFromDB();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -81,7 +85,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        presenter.removeItem(position);
+        if (presenter != null) {
+            presenter.removeItem(position);
+        }
     }
 
     @Override
@@ -99,7 +105,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
 
     @Override
     public void onResumeFragment() {
-        presenter.fetchAllFavoritesFromDB();
+        if (presenter != null) {
+            presenter.fetchAllFavoritesFromDB();
+        }
     }
 
     @Override
@@ -125,7 +133,9 @@ public class FavoritePostsFragment extends BaseFragment implements FavoritePosts
 
     @Override
     protected void destroyView() {
-        presenter.setView(null);
+        if (presenter != null) {
+            presenter.setView(null);
+        }
     }
 
     @Override

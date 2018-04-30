@@ -3,6 +3,7 @@ package com.juanpablofajardo.postsapp.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.juanpablofajardo.postsapp.utils.PostItemTouchHelper.PostItemTouchHelp
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Juan Pablo Fajardo Cano on 4/28/18.
@@ -36,6 +38,8 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
     @BindView(R.id.posts_recycler_view)
     protected RecyclerView allPostRecyclerView;
 
+    @BindView(R.id.fab_delete_all)
+    protected FloatingActionButton buttonDeleteAll;
 
     @Inject
     protected AllPostsPresenter presenter;
@@ -47,6 +51,7 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
 
         if (presenter != null) {
             presenter.setView(this);
+            presenter.fetchAllPostsFromDB();
         }
         setHasOptionsMenu(true);
     }
@@ -86,6 +91,20 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
     }
 
     @Override
+    public void setDeleteAllVisibility(boolean visible) {
+        if (isAdded()) {
+            buttonDeleteAll.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    @OnClick(R.id.fab_delete_all)
+    public void onDeleteAllClick() {
+        if (presenter != null) {
+            presenter.executeDeleteAll();
+        }
+    }
+
+    @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (presenter != null) {
             presenter.removeItem(position);
@@ -102,7 +121,7 @@ public class AllPostsFragment extends BaseFragment implements AllPostsView, Page
     @Override
     public void onResumeFragment() {
         if (presenter != null) {
-            presenter.fetchAllPostsFromDB();
+            presenter.updatePostStates();
         }
     }
 

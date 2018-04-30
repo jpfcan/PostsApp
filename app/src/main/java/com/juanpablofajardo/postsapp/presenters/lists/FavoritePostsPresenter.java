@@ -61,10 +61,10 @@ public class FavoritePostsPresenter implements BasePresenter<FavoritePostsView>,
             if (favoritePosts.isEmpty()) {
                 //TODO empty state
                 view.showMessageToast("There are no favorites");
-            } else {
-                adapter = new PostsAdapter(favoritePosts, this, postsRealmModel);
-                view.setupRecyclerView(adapter);
             }
+
+            adapter = new PostsAdapter(favoritePosts, this, postsRealmModel);
+            view.setupRecyclerView(adapter);
             shouldShowReload = true;
             view.refreshOptionsMenu();
             view.hideLoading();
