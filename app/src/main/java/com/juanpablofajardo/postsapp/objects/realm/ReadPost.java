@@ -14,4 +14,10 @@ public class ReadPost extends RealmObject {
     @PrimaryKey
     private int postId;
 
+    public ReadPost() {
+    }
+
+    public ReadPost(int postId) {
+        this.postId = postId;
+    }
 }

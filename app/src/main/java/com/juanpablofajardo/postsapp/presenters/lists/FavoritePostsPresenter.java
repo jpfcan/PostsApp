@@ -46,6 +46,7 @@ public class FavoritePostsPresenter implements BasePresenter<FavoritePostsView>,
         if (view != null) {
             shouldShowReload = false;
             view.refreshOptionsMenu();
+            view.setEmptyStateVisibility(false);
             view.showLoading();
             try {
                 setupAdapter(postsRealmModel.getFavoritePosts());
@@ -59,8 +60,7 @@ public class FavoritePostsPresenter implements BasePresenter<FavoritePostsView>,
     private void setupAdapter(final List<Post> favoritePosts) {
         if (view != null) {
             if (favoritePosts.isEmpty()) {
-                //TODO empty state
-                view.showMessageToast("There are no favorites");
+                view.setEmptyStateVisibility(true);
             }
 
             adapter = new PostsAdapter(favoritePosts, this, postsRealmModel);
@@ -73,6 +73,9 @@ public class FavoritePostsPresenter implements BasePresenter<FavoritePostsView>,
 
     public void removeItem(final int position) {
         adapter.removeItemOnSwipe(position);
+        if (adapter.getItems().isEmpty() && view != null) {
+            view.setEmptyStateVisibility(true);
+        }
     }
 
     @Override

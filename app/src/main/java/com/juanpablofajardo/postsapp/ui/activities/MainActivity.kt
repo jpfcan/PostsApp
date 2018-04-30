@@ -42,7 +42,6 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onError() {
-                //TODO maybe do nothing(?)
                 fetchPosts()
             }
         })
