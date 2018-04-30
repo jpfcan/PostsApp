@@ -14,7 +14,6 @@
     <string name="website_title">Website:</string>
     <string name="comments_title">Comments</string>
     <string name="comment_by_title">By:</string>
-    <string name="dismiss">Dismiss</string>
     
     <!-- PLACEHOLDERS -->
     <string name="user_title_placeholder">User: %s</string>
